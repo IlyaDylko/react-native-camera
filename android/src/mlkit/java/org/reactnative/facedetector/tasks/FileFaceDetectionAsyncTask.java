@@ -64,15 +64,6 @@ public class FileFaceDetectionAsyncTask extends AsyncTask<Void, Void, Void> {
       return;
     }
 
-    // We have to check if the requested image is in a directory safely accessible by our app.
-    boolean fileIsInSafeDirectories =
-          mPath.startsWith(mContext.getCacheDir().getPath()) || mPath.startsWith(mContext.getFilesDir().getPath());
-
-    if (!fileIsInSafeDirectories) {
-      mPromise.reject(ERROR_TAG, "The image has to be in the local app's directories.");
-      cancel(true);
-      return;
-    }
 
     if(!new File(mPath).exists()) {
       mPromise.reject(ERROR_TAG, "The file does not exist. Given path: `" + mPath + "`.");
